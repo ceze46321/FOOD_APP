@@ -15,7 +15,7 @@ jobs:
       uses: actions/setup-java@v4
       with:
         java-version: '11'
-        distribution: 'temurin'  # Specify the Java distribution
+        distribution: 'temurin'
 
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
@@ -25,15 +25,18 @@ jobs:
 
     - name: Install dependencies
       run: flutter pub get
+      working-directory: food_delivery_app  # Adjust this if the project root is different
 
     - name: Build AAB
       run: flutter build appbundle --release --verbose
+      working-directory: food_delivery_app  # Adjust this if the project root is different
 
     - name: Verify AAB exists
       run: ls -la build/app/outputs/bundle/release/
+      working-directory: food_delivery_app  # Adjust this if the project root is different
 
     - name: Upload AAB
       uses: actions/upload-artifact@v4
       with:
         name: appbundle
-        path: build/app/outputs/bundle/release/app-release.aab
+        path: food_delivery_app/build/app/outputs/bundle/release/app-release.aab  # Adjust the path
