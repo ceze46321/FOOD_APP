@@ -9,17 +9,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4  # Updated to v4 for better compatibility
+    - uses: actions/checkout@v4
 
     - name: Set up JDK 11
-      uses: actions/setup-java@v4  # Updated to v4 for better compatibility
+      uses: actions/setup-java@v4
       with:
         java-version: '11'
+        distribution: 'temurin'  # Specify the Java distribution
 
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.16.0' # Match your current version
+        flutter-version: '3.16.0'
         channel: 'stable'
 
     - name: Install dependencies
@@ -32,7 +33,7 @@ jobs:
       run: ls -la build/app/outputs/bundle/release/
 
     - name: Upload AAB
-      uses: actions/upload-artifact@v4  # Updated to v4 to fix the error
+      uses: actions/upload-artifact@v4
       with:
         name: appbundle
         path: build/app/outputs/bundle/release/app-release.aab
